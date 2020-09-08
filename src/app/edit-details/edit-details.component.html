@@ -1,0 +1,145 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 booking-form">
+      <h3 class="booking-heading">Make Your Reservation</h3>
+      <hr>
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+
+          <div class="col-md-6">
+            <div class="form-group text">
+              <span class="form-label">First Name </span>
+              <input type="text" formControlName="firstName" class="form-control">
+              <span class="error-block" *ngIf="!firstName.valid && (firstName.touched || custSubmitted)">
+                <p class="alert alert-danger title">Please provide first name</p>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group text">
+              <span class="form-label">Last Name </span>
+              <input type="text" formControlName="lastName" class="form-control">
+              <span class="error-block" *ngIf="!lastName.valid && (lastName.touched || custSubmitted)">
+                <p class="alert alert-danger title">Please provide last name</p>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group text">
+          <span class="form-label">Email </span>
+          <input type="text" formControlName="email" class="form-control">
+          <span class="error-block" *ngIf="!email.valid && (email.touched || custSubmitted)">
+            <span *ngIf="email.hasError('required')">
+              <p class="alert alert-danger title">Please provide name</p>
+            </span>
+            <p class="alert alert-danger title">Please provide valid email</p>
+          </span>
+        </div>
+
+        <div class="form-group text">
+          <span class="form-label">Mobile </span>
+          <input type="text" formControlName="mobile" class="form-control">
+          <span class="error-block" *ngIf="!mobile.valid && (mobile.touched || custSubmitted)">
+            <span *ngIf="mobile.hasError('required')">
+              <p class="alert alert-danger title">Please provide mobile number</p>
+            </span>
+            <span class="error-block" *ngIf="mobile.hasError('maxlength')">
+              <p class="alert alert-danger title">Invalid mobile number</p>
+            </span>
+          </span>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <span class="form-label">Room Type</span>
+              <select class="form-control" formControlName="roomType">
+                <option>Standard room/studio</option>
+                <option>Deluxe room</option>
+                <option>Joint room</option>
+                <option>Suite (mini/junior/master)</option>
+                <option>Apartment style</option>
+              </select>
+              <span class="select-arrow"></span>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <span class="form-label">No of Rooms</span>
+              <select class="form-control" formControlName="nbrRooms">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+              <span class="select-arrow"></span>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <span class="form-label">Adults</span>
+              <select class="form-control" formControlName="adult">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+              <span class="select-arrow"></span>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <span class="form-label">Children</span>
+              <select class="form-control" formControlName="chld">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+              <span class="select-arrow"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group text">
+          <span class="form-label">Number of Guests: </span>
+          <input type="number" formControlName="nbrGuests" class="form-control">
+          <span class="error-block" *ngIf="!nbrGuests.valid && (nbrGuests.touched || custSubmitted)">
+            <p class="alert alert-danger title">Please provide number of guests</p>
+          </span>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <span class="form-label">Check-In</span>
+                <input class="form-control" type="date" formControlName="checkin">
+                <span class="error-block" *ngIf="!checkin.valid && (checkin.touched || custSubmitted)">
+                  <p class="alert alert-danger title">Please provide check-in date</p>
+                </span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <span class="form-label">Check-Out</span>
+                <input class="form-control" type="date" formControlName="checkout">
+                <span class="error-block" *ngIf="!checkout.valid && (checkout.touched || custSubmitted)">
+                  <p class="alert alert-danger title">Please provide check-out date</p>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-lg btn-info btn-block">Next</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

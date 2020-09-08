@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'https://fonts.googleapis.com/css?family=Lato:400,600,700&subset=latin-ext';
+
+/*body{
+  background-image: url("assets/1.jpg");
+}*/
+body{
+  background: lightgray;
+}

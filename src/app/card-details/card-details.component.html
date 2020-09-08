@@ -1,0 +1,95 @@
+<div class="container-fluid py-3">
+  <div class="row">
+      <div class="col-6 col-sm-8 col-md-6 col-lg-4 mx-auto card-form">
+        <div class="card">
+          <div class="card-body">
+            <h4>Hello, {{displayFormData.firstName}} {{displayFormData.lastName}}</h4>
+            <br/><br/>
+            <p>Thank you for choosing us to accommodate you,<br/> for us to proceed with your request please confirm your payment.</p>
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-sm-8 col-md-6 col-lg-4 mx-auto card-form">
+          <div id="pay-invoice" class="card">
+              <div class="card-body">
+                  <div class="card-title">
+                      <h3 class="text-center">Confirm Payment</h3>
+                  </div>
+                  <hr>
+                  <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" novalidate>
+
+                      <div class="form-group">
+                          <label for="cc-number" class="control-label mb-1">Name on card</label>
+                          <input id="cc-number" name="cc-name" type="text"
+                          class="form-control cc-number identified visa"
+                          formControlName="nameOnCard"
+                          [ngClass]="{'is-invalid':(f.nameOnCard.dirty || f.nameOnCard.touched || paySubmitted) && f.nameOnCard.errors }">
+                          <div *ngIf="!f.nameOnCard.valid && (f.nameOnCard.dirty || f.nameOnCard.touched)" class="invalid-feedback">
+                            <div *ngIf="f.nameOnCard.errors" class="alert alert-danger">Invalid Cardholder Name</div>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="cc-number" class="control-label mb-1">Card number</label>
+                        <input id="cc-number" name="cc-number" type="number"
+                         class="form-control cc-number identified visa"
+                         formControlName="cardNumber"
+                         [ngClass]="{'is-invalid': f.cardNumber.errors && (f.nameOnCard.dirty  || f.nameOnCard.touched || paySubmitted) }">
+                         <div *ngIf="!f.cardNumber.valid && (f.cardNumber.dirty || f.cardNumber.touched)" class="invalid-feedback">
+                          <div *ngIf="f.cardNumber.errors" class="alert alert-danger">Invalid Card Number</div>
+                        </div>
+                    </div>
+
+                      <div class="row">
+                          <div class="col-sm-4">
+                              <div class="form-group expiry">
+                                  <label for="cc-exp" class="control-label mb-1">Date of Expiration</label>
+                                  <input style="margin-bottom: 5px;" id="cc-exp" name="cc-exp" type="number"
+                                  class="form-control cc-exp" formControlName="expiryMonth" placeholder="MM"
+                                  autocomplete="cc-exp"
+                                  [ngClass]="{'is-invalid': !f.expiryMonth.valid && (f.expiryMonth.dirty  || f.expiryMonth.touched || paySubmitted)}">
+                                  <input id="cc-exp" name="cc-exp" type="number"
+                                  class="form-control cc-exp" formControlName="expiryYear" placeholder="YY" autocomplete="cc-exp"
+                                  [ngClass]="{'is-invalid': f.expiryYear.errors && (f.expiryYear.dirty  || f.expiryYear.touched || paySubmitted)}">
+                                  <div *ngIf="(!f.expiryMonth.valid && (f.expiryMonth.dirty || f.expiryMonth.touched || paySubmitted)) || (!f.expiryYear.valid && (f.expiryYear.dirty || f.expiryYear.touched || paySubmitted))" class="invalid-feedback">
+                                    <div *ngIf="f.expiryMonth.errors || f.expiryYear.errors" class="alert alert-danger">Invalid Date of Expiration</div>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="col-sm-8">
+                              <label for="x_card_code" class="control-label mb-1">CVV</label>
+                              <div class="input-group">
+                                  <input id="x_card_code" name="x_card_code" type="number"
+                                  class="form-control cc-cvc"
+                                  formControlName="cardCVVNumber" autocomplete="off"
+                                  [ngClass]="{'is-invalid': f.cardCVVNumber.errors && (f.cardCVVNumber.dirty  || f.cardCVVNumber.touched || paySubmitted)}">
+                                  <div class="input-group-append">
+                                      <div class="input-group-text">
+                                      <span class="fa fa-question-circle fa-lg" data-toggle="popover" data-container="body" data-html="true" data-title="CVV"
+                                      data-content="<div class='text-center one-card'>The 3 digit code on back of the card..<div class='visa-mc-cvc-preview'></div></div>"
+                                      data-trigger="hover"></span>
+                                      </div>
+                                  </div>
+                                  <div *ngIf="!f.cardCVVNumber.valid && (f.cardCVVNumber.dirty || f.cardCVVNumber.touched || paySubmitted)" class="invalid-feedback">
+                                    <div *ngIf="f.cardCVVNumber.errors" class="alert alert-danger">Invalid CVV / CVC Number.</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                              <i class="fa fa-lock fa-lg"></i>&nbsp;
+                              <span id="payment-button-amount">Pay </span>
+                              <span id="payment-button-sending" style="display:none;">Sending…</span>
+                          </button>
+                      </div>
+                      <h3 class="center-block text-center">{{displayMessage}}</h3>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

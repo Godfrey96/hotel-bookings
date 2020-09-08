@@ -1,0 +1,95 @@
+
+<div class="container-fluid card-form">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-9 mx-auto card-form">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Hello, {{displayFormData.firstName}}  {{displayFormData.lastName}}</h5>
+          <hr>
+          <p class="card-text">We are pleased to inform you that your reservation request has been received and confirmed.</p>
+          <h5 class="head-text">Booking Details</h5>
+
+          <table class="table table-sm table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Room Type</th>
+                <th scope="col">No. of Rooms</th>
+                <th scope="col">Adult</th>
+                <th scope="col">Children</th>
+                <th scope="col">No. of Guests</th>
+                <th scope="col">Check-In</th>
+                <th scope="col">Check-Out</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{displayFormData.roomType}}</td>
+                <td>{{displayFormData.nbrRooms}}</td>
+                <td>{{displayFormData.adult}}</td>
+                <td>{{displayFormData.chld}}</td>
+                <td>{{displayFormData.nbrGuests}}</td>
+                <td>{{displayFormData.checkin}}</td>
+                <td>{{displayFormData.checkout}}</td>
+                <td>Confirmed</td>
+              </tr>
+              <tr>
+            </tbody>
+          </table>
+
+          <br/><br/><br>
+          <h5 class="head-text">Payment Details</h5>
+
+          <table class="table table-sm table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Name on Card</th>
+                <th scope="col">Card No.</th>
+                <th scope="col">Expiry Month</th>
+                <th scope="col">Expiry Year</th>
+                <th scope="col">Total</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{displayFormCard.nameOnCard}}</td>
+                <td>{{displayFormCard.cardNumber}}</td>
+                <td>{{displayFormCard.expiryMonth}}</td>
+                <td>{{displayFormCard.expiryYear}}</td>
+                <td>R2500</td>
+                <td>Completed</td>
+              </tr>
+              <tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<p>
+  first Name: {{displayFormData.firstName}}
+  LAst Name: {{displayFormData.lastName}}
+  email: {{displayFormData.email}}
+  mobile: {{displayFormData.mobile}}
+  Room Type: {{displayFormData.roomType}}
+  Number Rooms: {{displayFormData.nbrRooms}}
+  Adult: {{displayFormData.adult}}
+  Child: {{displayFormData.chld}}
+  Number Guests: {{displayFormData.nbrGuests}}
+  Check-In: {{displayFormData.checkin}}
+  Check-Out: {{displayFormData.checkout}}
+</p>
+<br />
+<p>
+  Name on Card: {{displayFormCard.nameOnCard}}
+  Card Number: {{displayFormCard.cardNumber}}
+  Expiry Month: {{displayFormCard.expiryMonth}}
+  Expiry Year: {{displayFormCard.expiryYear}}
+  CVV Number: {{displayFormCard.cardCVVNumber}}
+</p>-->
+
