@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+
 // import services
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { DetailsService } from 'src/app/services/details.service';
@@ -15,12 +17,23 @@ export class EditDetailsComponent implements OnInit {
 
   editForm: FormGroup;
   custSubmitted: boolean;
+  datePickerConfig: Partial<BsDatepickerConfig>;
+  minDate: Date;
 
   constructor(private fb: FormBuilder,
              private router: Router,
              private alertify: AlertifyService,
              private detailsService: DetailsService
-             ) { }
+             ) {
+              this.datePickerConfig = Object.assign({},
+                {
+                  containerClass: 'theme-dark-blue',
+                   dateInputFormat: 'DD/MM/YYYY',
+                   showWeekNumbers: false
+                  });
+              this.minDate = new Date();
+              this.minDate.setDate(this.minDate.getDate());
+             }
 
   ngOnInit() {
     this.editDetails();
@@ -28,17 +41,17 @@ export class EditDetailsComponent implements OnInit {
 
   editDetails(){
     this.editForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.pattern('^[A-Za-z][A-Za-z -]*$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[A-Za-z][A-Za-z -]*$')]],
       email: ['', [Validators.required, Validators.email]],
-      mobile: ['', [ Validators.required, Validators.maxLength(10)]],
+      mobile: ['', [ Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       roomType: ['', Validators.required],
       nbrRooms: ['', Validators.required],
       adult: ['', Validators.required],
       chld: ['', Validators.required],
       nbrGuests: ['', Validators.required],
-      checkin: ['', Validators.required],
-      checkout: ['', Validators.required]
+      checkin: ['', Validators.required]
+      //checkout: ['', Validators.required]
     });
   }
 
@@ -46,7 +59,7 @@ export class EditDetailsComponent implements OnInit {
     this.custSubmitted = true;
     if(this.editForm.valid){
       this.detailsService.setFormData(this.editForm.value);
-      this.alertify.success('Thank you for your booking please complete payment')
+      this.alertify.success('Thank you for your booking, please complete payment')
       this.router.navigate(['/app-card-details']);
     }else{
       this.alertify.error('Kindly provide all the required fields');

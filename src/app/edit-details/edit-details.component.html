@@ -40,13 +40,16 @@
 
         <div class="form-group text">
           <span class="form-label">Mobile </span>
-          <input type="text" formControlName="mobile" class="form-control">
+          <input type="number" formControlName="mobile" class="form-control">
           <span class="error-block" *ngIf="!mobile.valid && (mobile.touched || custSubmitted)">
             <span *ngIf="mobile.hasError('required')">
               <p class="alert alert-danger title">Please provide mobile number</p>
             </span>
             <span class="error-block" *ngIf="mobile.hasError('maxlength')">
-              <p class="alert alert-danger title">Invalid mobile number</p>
+              <p class="alert alert-danger title">Mobile number can only have 10 digits</p>
+            </span>
+            <span class="error-block" *ngIf="mobile.hasError('minlength')">
+              <p class="alert alert-danger title">Mobile number cannot be less than 10 digits</p>
             </span>
           </span>
         </div>
@@ -111,34 +114,45 @@
           <span class="error-block" *ngIf="!nbrGuests.valid && (nbrGuests.touched || custSubmitted)">
             <p class="alert alert-danger title">Please provide number of guests</p>
           </span>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <span class="form-label">Check-In</span>
-                <input class="form-control" type="date" formControlName="checkin">
-                <span class="error-block" *ngIf="!checkin.valid && (checkin.touched || custSubmitted)">
-                  <p class="alert alert-danger title">Please provide check-in date</p>
-                </span>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <span class="form-label">Check-Out</span>
-                <input class="form-control" type="date" formControlName="checkout">
-                <span class="error-block" *ngIf="!checkout.valid && (checkout.touched || custSubmitted)">
-                  <p class="alert alert-danger title">Please provide check-out date</p>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <button class="btn btn-lg btn-info btn-block">Next</button>
-          </div>
-
         </div>
+
+        <div class="form-group">
+          <span class="form-label">Check-In and Check-Out</span>
+          <input class="form-control" bsDaterangepicker [minDate]="minDate" [bsConfig]="datePickerConfig" type="text"
+            placeholder="dd/mm/yyyy - dd/mm/yyyy" placement="top" formControlName="checkin">
+          <span class="error-block" *ngIf="!checkin.valid && (checkin.touched || custSubmitted)">
+            <p class="alert alert-danger title">Please provide check-in and check-out dates</p>
+          </span>
+        </div>
+
+        <!--<div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <span class="form-label">Check-In and Check-Out</span>
+              <input class="form-control" bsDaterangepicker [minDate]="minDate" [bsConfig]="datePickerConfig" type="text"
+                placeholder="dd/mm/yyyy" placement="top" formControlName="checkin">
+              <span class="error-block" *ngIf="!checkin.valid && (checkin.touched || custSubmitted)">
+                <p class="alert alert-danger title">Please provide check-in date</p>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <span class="form-label">Check-Out</span>
+              <input class="form-control" bsDatepicker [minDate]="maxDate" [bsConfig]="datePickerConfig" type="text"
+                placeholder="dd/mm/yyyy" placement="right" formControlName="checkout">
+              <span class="error-block" *ngIf="!checkout.valid && (checkout.touched || custSubmitted)">
+                <p class="alert alert-danger title">Please provide check-out date</p>
+              </span>
+            </div>
+          </div>
+        </div>-->
+
+        <div class="form-group">
+          <button class="btn btn-lg btn-info btn-block">Next</button>
+        </div>
+
       </form>
     </div>
   </div>

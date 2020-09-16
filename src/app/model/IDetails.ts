@@ -9,5 +9,5 @@ export interface IDetails {
   chld: number;
   nbrGuests: number;
   checkin: Date;
-  checkout: Date;
+  //checkout: Date;
 }

@@ -1,8 +1,36 @@
 
 <div class="container-fluid card-form">
   <div class="row">
-    <div class="col-12 col-sm-6 col-md-6 col-lg-9 mx-auto card-form">
+    <div class="col-12 col-sm-6 col-md-6 mx-auto card-form">
       <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Hello, {{displayFormData.firstName}}  {{displayFormData.lastName}}</h5>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="head-text">Booking Details</h5>
+            <p class="nameSize">
+              <b>Email:</b> {{displayFormData.email}} <br/>
+              <b>Mobile:</b> {{displayFormData.mobile}} <br/>
+              <b>Room Type:</b> {{displayFormData.roomType}} <br/>
+              <b>No. of Rooms:</b> {{displayFormData.nbrRooms}} <br/>
+              <b>Adult:</b> {{displayFormData.adult}} <br/>
+              <b>Children:</b> {{displayFormData.chld}} <br/>
+              <b>No. of Guests:</b> {{displayFormData.nbrGuests}} <br/>
+              <b>Check-In and Check-out:</b> {{displayFormData.checkin}} <br/>
+              <!--<b>Check-Out:</b> {{displayFormData.checkout}}-->
+            </p>
+            <hr>
+            <h5 class="head-text">Payment Details</h5>
+            <p class="nameSize">
+              <b>Cardholder Name:</b> {{displayFormCard.nameOnCard}} <br/>
+              <b>Card Number:</b> {{displayFormCard.cardNumber}}<br/>
+              <b>Expiry Date:</b> {{displayFormCard.expiryMonth}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--<div class="card">
         <div class="card-body">
           <h5 class="card-title">Hello, {{displayFormData.firstName}}  {{displayFormData.lastName}}</h5>
           <hr>
@@ -43,10 +71,10 @@
           <table class="table table-sm table-dark">
             <thead>
               <tr>
-                <th scope="col">Name on Card</th>
+                <th scope="col">Cardholder Name</th>
                 <th scope="col">Card No.</th>
-                <th scope="col">Expiry Month</th>
-                <th scope="col">Expiry Year</th>
+                <th scope="col">Expiry Date</th>
+                <!--<th scope="col">Expiry Year</th>-
                 <th scope="col">Total</th>
                 <th scope="col">Status</th>
               </tr>
@@ -56,7 +84,7 @@
                 <td>{{displayFormCard.nameOnCard}}</td>
                 <td>{{displayFormCard.cardNumber}}</td>
                 <td>{{displayFormCard.expiryMonth}}</td>
-                <td>{{displayFormCard.expiryYear}}</td>
+                <!--<td>{{displayFormCard.expiryYear}}</td>
                 <td>R2500</td>
                 <td>Completed</td>
               </tr>
@@ -65,31 +93,11 @@
           </table>
 
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </div>
 
 
-<!--<p>
-  first Name: {{displayFormData.firstName}}
-  LAst Name: {{displayFormData.lastName}}
-  email: {{displayFormData.email}}
-  mobile: {{displayFormData.mobile}}
-  Room Type: {{displayFormData.roomType}}
-  Number Rooms: {{displayFormData.nbrRooms}}
-  Adult: {{displayFormData.adult}}
-  Child: {{displayFormData.chld}}
-  Number Guests: {{displayFormData.nbrGuests}}
-  Check-In: {{displayFormData.checkin}}
-  Check-Out: {{displayFormData.checkout}}
-</p>
-<br />
-<p>
-  Name on Card: {{displayFormCard.nameOnCard}}
-  Card Number: {{displayFormCard.cardNumber}}
-  Expiry Month: {{displayFormCard.expiryMonth}}
-  Expiry Year: {{displayFormCard.expiryYear}}
-  CVV Number: {{displayFormCard.cardCVVNumber}}
-</p>-->
+
 

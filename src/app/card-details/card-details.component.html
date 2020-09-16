@@ -18,9 +18,81 @@
                   </div>
                   <hr>
                   <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" novalidate>
+                    <div class="form-group">
+                    <label for="username">Card Holder Name</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                      </div>
+                      <input type="text" class="form-control" name="username"
+                      formControlName="nameOnCard"
+                      [ngClass]="{'is-invalid':(f.nameOnCard.dirty || f.nameOnCard.touched || paySubmitted) && f.nameOnCard.errors }">
+                      <div *ngIf="!f.nameOnCard.valid && (f.nameOnCard.dirty || f.nameOnCard.touched)" class="invalid-feedback">
+                        <div *ngIf="f.nameOnCard.errors" class="alert alert-danger">Invalid Cardholder Name</div>
+                      </div>
+                    </div> <!-- input-group.// -->
+                    </div> <!-- form-group.// -->
+
+                    <div class="form-group">
+                    <label for="cardNumber">Card number</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
+                      </div>
+                      <input type="text" class="form-control" name="cardNumber"
+                      formControlName="cardNumber"
+                      [ngClass]="{'is-invalid': f.cardNumber.errors && (f.cardNumber.dirty  || f.cardNumber.touched || paySubmitted) }">
+                      <div *ngIf="!f.cardNumber.valid && (f.cardNumber.dirty || f.cardNumber.touched)" class="invalid-feedback">
+                        <div *ngIf="f.cardNumber.errors" class="alert alert-danger">Invalid Card Number</div>
+                      </div>
+                    </div> <!-- input-group.// -->
+                    </div> <!-- form-group.// -->
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><span class="hidden-xs">Expiration</span> </label>
+                              <div class="form-inline">
+                                <input name="cc-exp" bsDatepicker [minDate]="minMonth" [bsConfig]="datePickerConfig"
+                                bsDatepicker [(bsValue)]="bsValue" type="text" formControlName="expiryMonth"
+                                placeholder="MM/YYYY" class="form-control"
+                                [ngClass]="{'is-invalid': !f.expiryMonth.valid && (f.expiryMonth.dirty  || f.expiryMonth.touched || paySubmitted)}">
+
+                                <!--<span style="width:10%; text-align: center"> / </span>-->
+
+                                <!--<input style="width:45%;" name="cc-exp" bsDatepicker [maxDate]="minYear" [bsConfig]="datePickerConfig"
+                                type="text" formControlName="expiryYear"
+                                placeholder="YY" class="form-control"
+                                [ngClass]="{'is-invalid': f.expiryYear.errors && (f.expiryYear.dirty  || f.expiryYear.touched || paySubmitted)}">-->
+                                <!--<div *ngIf="(!f.expiryMonth.valid && (f.expiryMonth.dirty || f.expiryMonth.touched || paySubmitted)) || (!f.expiryYear.valid && (f.expiryYear.dirty || f.expiryYear.touched || paySubmitted))" class="invalid-feedback">
+                                  <div *ngIf="f.expiryMonth.errors || f.expiryYear.errors" class="alert alert-danger">Invalid Date of Expiration</div>
+                                </div>-->
+                                <div *ngIf="(!f.expiryMonth.valid && (f.expiryMonth.dirty || f.expiryMonth.touched || paySubmitted))" class="invalid-feedback">
+                                  <div *ngIf="f.expiryMonth.errors" class="alert alert-danger">Invalid Date of Expiration</div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
+                                <input class="form-control" type="text" formControlName="cardCVVNumber"
+                                [ngClass]="{'is-invalid': f.cardCVVNumber.errors && (f.cardCVVNumber.dirty  || f.cardCVVNumber.touched || paySubmitted)}">
+                                <div *ngIf="!f.cardCVVNumber.valid && (f.cardCVVNumber.dirty || f.cardCVVNumber.touched || paySubmitted)" class="invalid-feedback">
+                                  <div *ngIf="f.cardCVVNumber.errors" class="alert alert-danger">Invalid CVV / CVC Number.</div>
+                                </div>
+                            </div> <!-- form-group.// -->
+                        </div>
+                    </div> <!-- row.// -->
+                      <button class="btn btn-lg btn-info btn-block" type="submit"> Confirm </button>
+
+                      <h3 class="center-block text-center">{{displayMessage}}</h3>
+                    </form>
+
+                  <!--<form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" novalidate>
 
                       <div class="form-group">
-                          <label for="cc-number" class="control-label mb-1">Name on card</label>
+                          <label for="cc-number" class="control-label mb-1">Card Holder Name</label>
                           <input id="cc-number" name="cc-name" type="text"
                           class="form-control cc-number identified visa"
                           formControlName="nameOnCard"
@@ -31,24 +103,25 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="cc-number" class="control-label mb-1">Card number</label>
+                        <label for="cc-number" class="control-label mb-1">Card Number</label>
                         <input id="cc-number" name="cc-number" type="number"
                          class="form-control cc-number identified visa"
                          formControlName="cardNumber"
-                         [ngClass]="{'is-invalid': f.cardNumber.errors && (f.nameOnCard.dirty  || f.nameOnCard.touched || paySubmitted) }">
+                         [ngClass]="{'is-invalid': f.cardNumber.errors && (f.cardNumber.dirty  || f.cardNumber.touched || paySubmitted) }">
                          <div *ngIf="!f.cardNumber.valid && (f.cardNumber.dirty || f.cardNumber.touched)" class="invalid-feedback">
                           <div *ngIf="f.cardNumber.errors" class="alert alert-danger">Invalid Card Number</div>
                         </div>
                     </div>
 
                       <div class="row">
-                          <div class="col-sm-4">
+                          <div class="col-sm-8">
                               <div class="form-group expiry">
-                                  <label for="cc-exp" class="control-label mb-1">Date of Expiration</label>
+                                  <label for="cc-exp" class="control-label mb-1">Expiry Date</label>
                                   <input style="margin-bottom: 5px;" id="cc-exp" name="cc-exp" type="number"
                                   class="form-control cc-exp" formControlName="expiryMonth" placeholder="MM"
                                   autocomplete="cc-exp"
                                   [ngClass]="{'is-invalid': !f.expiryMonth.valid && (f.expiryMonth.dirty  || f.expiryMonth.touched || paySubmitted)}">
+
                                   <input id="cc-exp" name="cc-exp" type="number"
                                   class="form-control cc-exp" formControlName="expiryYear" placeholder="YY" autocomplete="cc-exp"
                                   [ngClass]="{'is-invalid': f.expiryYear.errors && (f.expiryYear.dirty  || f.expiryYear.touched || paySubmitted)}">
@@ -58,8 +131,9 @@
                               </div>
                           </div>
 
-                          <div class="col-sm-8">
-                              <label for="x_card_code" class="control-label mb-1">CVV</label>
+                          <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="x_card_code" class="control-label mb-1">CVV</label>
                               <div class="input-group">
                                   <input id="x_card_code" name="x_card_code" type="number"
                                   class="form-control cc-cvc"
@@ -76,6 +150,7 @@
                                     <div *ngIf="f.cardCVVNumber.errors" class="alert alert-danger">Invalid CVV / CVC Number.</div>
                                   </div>
                               </div>
+                              </div>
                           </div>
                       </div>
 
@@ -83,13 +158,14 @@
                           <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                               <i class="fa fa-lock fa-lg"></i>&nbsp;
                               <span id="payment-button-amount">Pay </span>
-                              <span id="payment-button-sending" style="display:none;">Sending…</span>
+                              <!--<span id="payment-button-sending" style="display:none;">Sending…</span>
                           </button>
                       </div>
                       <h3 class="center-block text-center">{{displayMessage}}</h3>
-                  </form>
+                  </form>-->
               </div>
           </div>
       </div>
   </div>
 </div>
+
